@@ -19,4 +19,10 @@ function App() {
   );
 }
 
+// EXPORTING TYPE OF THUNK DISPATCH
+export type AppDispatch = typeof store.dispatch
+
+// EXPORTING TYPE OF ROOT STATE 
+export type RootState = ReturnType<typeof store.getState>
+
 export default App;
