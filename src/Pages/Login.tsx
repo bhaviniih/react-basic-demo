@@ -2,16 +2,9 @@ import React, { useState } from "react";
 import TextField from "../Component/TextField";
 import Button from "../Component/Button";
 import { useNavigate } from "react-router-dom";
+import { loginCredentialsInterface } from "../Utils/Types";
 
-interface LoginInterface { }
-
-// TYPE DECLARATION FOR STATE
-interface loginCredentialsInterface {
-    username: string,
-    password: string
-}
-
-const Login: React.FC<LoginInterface> = () => {
+const Login: React.FC = () => {
 
     // FOR REDIRECT TO ANOTHER URL 
     const navigate = useNavigate()

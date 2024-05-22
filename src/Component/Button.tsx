@@ -1,11 +1,5 @@
 import React from "react";
-
-interface ButtonInterface {
-    type?: 'submit' | 'reset' | 'button',
-    lable: string,
-    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void,
-    isLoading?: Boolean
-}
+import { ButtonInterface } from "../Utils/Types";
 
 const Button: React.FC<ButtonInterface> = ({ type = "submit", lable, onClick = () => { }, isLoading = false }) => {
     return (

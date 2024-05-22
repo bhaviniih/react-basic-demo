@@ -1,12 +1,5 @@
 import React from "react";
-
-interface TextFieldInterface {
-    lable?: string,
-    type: string,
-    onChnage: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    value: string | number | null,
-    name: string,
-}
+import { TextFieldInterface } from "../Utils/Types";
 
 const TextField: React.FC<TextFieldInterface & React.InputHTMLAttributes<HTMLInputElement>> = ({ lable, type, onChnage, value = null, name, ...rest }) => {
     return (

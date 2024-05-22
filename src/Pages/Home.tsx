@@ -1,31 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deletTodosList, todosList, updateTodosList } from "../Redux/AddTaskReducer";
 import { AppDispatch, RootState } from "../App";
 import { commonType, taskData } from "../Utils/Types";
 import Button from "../Component/Button";
 
-interface HomeInterface { }
-
-const Home: React.FC<HomeInterface> = () => {
+const Home: React.FC = () => {
 
     // FOR DISPATCH ACTION 
     const dispatch = useDispatch<AppDispatch>()
 
     // FOR GETTING DATA FROM REDUX STORE
     const taskList: commonType & { data: taskData[] } = useSelector((state: RootState) => state.task.fetchData)
-    const taskDeleteLoading: boolean = useSelector((state: RootState) => state.task.deleteData.isLoading)
-    const taskUpdateLoading: boolean = useSelector((state: RootState) => state.task.updateData.isLoading)
+
+    // LOCAL STATE
+    const [updateLoading, setUpdateLoading] = useState<number[]>([])
+    const [deleteLoading, setDeleteLoading] = useState<number[]>([])
 
     useEffect(() => {
         dispatch(todosList())
     }, [dispatch])
 
     const handleEdit = (data: taskData) => {
+        setUpdateLoading([...updateLoading, data.id])
         dispatch(updateTodosList(data))
     }
 
     const handleDelete = (id: number) => {
+        setDeleteLoading([...deleteLoading, id])
         dispatch(deletTodosList(id))
     }
     return (
@@ -53,8 +55,8 @@ const Home: React.FC<HomeInterface> = () => {
                                 <td>{data.id}</td>
                                 <td>{data.title}</td>
                                 <td>
-                                    <Button lable="Edit" isLoading={taskUpdateLoading} onClick={(event: React.MouseEvent<HTMLButtonElement>) => handleEdit(data)} />
-                                    <Button lable="Delete" isLoading={taskDeleteLoading} onClick={(event: React.MouseEvent<HTMLButtonElement>) => handleDelete(data.id)} />
+                                    <Button lable="Edit" isLoading={updateLoading.includes(data.id)} onClick={(event: React.MouseEvent<HTMLButtonElement>) => handleEdit(data)} />
+                                    <Button lable="Delete" isLoading={deleteLoading.includes(data.id)} onClick={(event: React.MouseEvent<HTMLButtonElement>) => handleDelete(data.id)} />
                                 </td>
                             </tr>
                         ))}

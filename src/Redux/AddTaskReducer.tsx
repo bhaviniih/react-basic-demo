@@ -3,7 +3,7 @@ import { AddFetchResponse, DeleteFetchResponse, FetchResponse, taskData, taskLis
 import { deleteM, get, put } from "../Api";
 
 export const todosList = createAsyncThunk<FetchResponse>('todosLists', async () => {
-    const res = await get("/todos");
+    const res = await get("/todos/?userId=500");
     return res;
 })
 
@@ -27,15 +27,18 @@ const initialState: taskListInterface = {
         isLoading: false,
         message: "",
         data: null,
+        isSuccess : false
     },
     updateData: {
         isLoading: false,
         message: "",
-        data: null
+        data: null,
+        isSuccess : false
     },
     deleteData: {
         isLoading: false,
-        message: ""
+        message: "",
+        isSuccess : false
     }
 }
 
@@ -109,7 +112,8 @@ export const taskSlice = createSlice({
                     ...state,
                     deleteData: {
                         isLoading: true,
-                        message: ""
+                        message: "",
+                        isSuccess : false
                     }
                 }
             })
@@ -118,7 +122,8 @@ export const taskSlice = createSlice({
                     ...state,
                     deleteData: {
                         isLoading: false,
-                        message: "Data delete successfully !"
+                        message: "Data delete successfully !",
+                        isSuccess : true
                     }
                 }
             })
@@ -127,7 +132,8 @@ export const taskSlice = createSlice({
                     ...state,
                     deleteData: {
                         isLoading: false,
-                        message: "Something went wrong"
+                        message: "Something went wrong",
+                        isSuccess : false
                     }
                 }
             })

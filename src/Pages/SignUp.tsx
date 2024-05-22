@@ -2,18 +2,9 @@ import React, { useState } from "react";
 import TextField from "../Component/TextField";
 import Button from "../Component/Button";
 import { useNavigate } from "react-router-dom";
+import { signUpDetailsInterface } from "../Utils/Types";
 
-interface SingUpInterface { }
-
-// TYPE DECLARATION FOR STATE
-interface signUpDetailsInterface {
-    username: string,
-    first_name: string,
-    last_name: string,
-    mobile_number: number | null,
-    password: string
-}
-const SingUp: React.FC<SingUpInterface> = () => {
+const SingUp: React.FC = () => {
 
     // FOR REDIRECT TO ANOTHER URL 
     const navigate = useNavigate()
